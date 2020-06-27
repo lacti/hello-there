@@ -2,6 +2,7 @@ import React from "react";
 import ReactQuill from "react-quill";
 import "./App.css";
 import "react-quill/dist/quill.snow.css";
+import "react-quill/dist/quill.bubble.css";
 
 const modules = {
   toolbar: [
@@ -33,15 +34,18 @@ const formats = [
 ];
 
 function App() {
+  const [preview, setPreview] = React.useState(false);
   const [value, setValue] = React.useState("");
   return (
     <div className="App">
+      <button onClick={() => setPreview(!preview)}>Toggle Preview</button>
       <ReactQuill
-        theme="snow"
+        theme={preview ? "bubble" : "snow"}
         formats={formats}
         modules={modules}
         value={value}
         onChange={setValue}
+        readOnly={preview}
       />
     </div>
   );
